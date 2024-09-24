@@ -44,46 +44,49 @@ fun a() {
 fun Act1() {
     PMDAct1Theme {
         val context = LocalContext.current
-        var text by remember {mutableStateOf("Introduce un número primo")}
-        var btText by remember {mutableStateOf("Comprobar")}
-        var textField by remember { mutableStateOf("")}
-        Column (modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 40.dp),
-            Arrangement.spacedBy(20.dp)) {
+        val resources = context.resources
+        var text by remember { mutableStateOf(resources.getString(R.string.introduce_numero_primo)) }
+        var btText by remember { mutableStateOf(resources.getString(R.string.comprobar)) }
+        var textField by remember { mutableStateOf("") }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 40.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
             Text(text)
 
             TextField(
                 value = textField,
                 onValueChange = { textField = it },
-                label = {Text("Tu número")},
+                label = { Text(resources.getString(R.string.tu_numero)) },
                 modifier = Modifier.fillMaxWidth()
             )
-            Button(onClick = { //Quedaría más limpio en función, pero pereza
-                if (!textField.isEmpty() && btText != "Reiniciar") {
-                    var nem = textField.toIntOrNull()
-                    btText = "Reiniciar"
+
+            Button(onClick = {
+                if (btText != resources.getString(R.string.reiniciar)) {
+                    val nem = textField.toIntOrNull()
+                    btText = resources.getString(R.string.reiniciar)
                     if (nem == null || nem < 1) {
-                        text = "No es un número primo"
+                        text = resources.getString(R.string.no_es_numero_primo)
                         return@Button
                     }
                     for (i in 2..nem / 2) {
                         if (nem % i == 0) {
-                            text = "No es un número primo"
+                            text = resources.getString(R.string.no_es_numero_primo)
                             return@Button
                         }
                     }
-                    text = "Es número primo"
-                }
-                else {
-                    text = "Introduce un numero primo"
+                    text = resources.getString(R.string.es_numero_primo)
+                } else {
+                    text = resources.getString(R.string.introduce_numero_primo)
                     textField = ""
-                    btText = "Comprobar"
+                    btText = resources.getString(R.string.comprobar)
                 }
             }) {
                 Text(btText)
             }
         }
-
     }
 }

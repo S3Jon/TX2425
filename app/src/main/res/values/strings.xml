@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PMDAct1</string>
+    <string name="introduce_numero_primo">Introduce un número primo</string>
+    <string name="comprobar">Comprobar</string>
+    <string name="reiniciar">Reiniciar</string>
+    <string name="es_numero_primo">Es número primo</string>
+    <string name="no_es_numero_primo">No es un número primo</string>
+    <string name="tu_numero">Tu número</string>
 </resources>
