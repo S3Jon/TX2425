@@ -21,5 +21,8 @@ data class BookEntity(
 
     @ColumnInfo(name = "pub_date")
     @NonNull
-    var pubDate: String
+    var pubDate: String,
+
+    @ColumnInfo(name = "genre")
+    var genre: String = ""
 )

@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import androidx.room.Room
+import com.example.room.Migrations.MIGRATION_1_2
 
 class MainActivity: AppCompatActivity() {
     private lateinit var database: AppDatabase
@@ -23,7 +24,7 @@ class MainActivity: AppCompatActivity() {
         }
         database = Room.databaseBuilder(
             application, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
-            .allowMainThreadQueries()
+            .allowMainThreadQueries().addMigrations(MIGRATION_1_2)
             .build()
         saveBooks()
         val btnBooks: Button = findViewById(R.id.btnBooks)
