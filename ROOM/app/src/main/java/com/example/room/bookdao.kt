@@ -15,6 +15,17 @@ interface BooksDao {
 
     @Query("SELECT * FROM books WHERE title =:title")
     fun getByTitle(title:String): List<BookEntity>
+
+    @Query("SELECT * FROM books WHERE author =:author")
+    fun getByAuthor(author:String): List<BookEntity>
+
+    @Query("DELETE FROM books WHERE id = (SELECT id FROM books LIMIT 1)")
+    fun deleteFirstBook()
+
+    @Query("DELETE FROM books")
+    fun emptyBookDb()
+
     @Update
     fun update(book: BookEntity)
+
 }
