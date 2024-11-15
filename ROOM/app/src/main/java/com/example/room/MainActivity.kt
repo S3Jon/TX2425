@@ -60,7 +60,12 @@ class MainActivity: AppCompatActivity() {
                     pubDate = "$fecha",
                     genre = "lol"
                 )
+                Toast.makeText(this, "Libro añadido", Toast.LENGTH_SHORT).show()
                 database.booksDao.insertBook(query)
+                btnMostrarTodo.performClick()
+            }
+            else{
+                Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
         btnActualizar.setOnClickListener {
