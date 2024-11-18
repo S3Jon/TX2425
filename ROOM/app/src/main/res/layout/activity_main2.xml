@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,15 +15,15 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:paddingBottom="4dp"
-        android:text="Título del libro:"
+        android:text="Nombre del autor:"
         android:textSize="18sp" />
 
     <!-- Campo para el nombre del autor -->
     <EditText
-        android:id="@+id/etBookTitle"
+        android:id="@+id/etAuthorName"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Ingrese el título"
+        android:hint="Ingrese el nombre"
         android:inputType="text"
         android:padding="8dp" />
 
@@ -32,14 +32,14 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingBottom="4dp"
-        android:text="Autor del libro:"
+        android:text="Pais de origen:"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/etAuthorName"
+        android:id="@+id/etAuthorCountry"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:hint="Ingrese el nombre del autor"
+        android:hint="Ingrese el pais del autor"
         android:inputType="textPersonName"
         android:padding="8dp" />
 
@@ -49,29 +49,29 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingBottom="4dp"
-        android:text="Fecha de publicación:"
+        android:text="Año de nacimiento:"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/etPublicationDate"
+        android:id="@+id/etBirthYear"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:hint="Ingrese la fecha de publicación"
+        android:hint="Ingrese año:"
         android:inputType="date"
         android:padding="8dp" />
 
     <Button
-        android:id="@+id/btnBooks"
+        android:id="@+id/btnMostratAutores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Mostrar Datos" />
 
     <TextView
-        android:id="@+id/tvBookData"
+        android:id="@+id/tvAuthorData"
         android:layout_width="match_parent"
-        android:layout_height="106dp"
-        android:text="aqui se muestran los datos del libro" />
+        android:layout_height="134dp"
+        android:text="aqui se muestran los datos de los autores" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,25 +109,25 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnBuscarPorNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:rotation="-0"
             android:rotationX="0"
             android:rotationY="15"
-            android:text="Borrar primer libro"
+            android:text="Buscar autor por nombre"
             android:paddingStart="16dp" />
 
         <Button
-            android:id="@+id/btn4"
+            android:id="@+id/btnBuscarPorPais"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:rotation="0"
             android:rotationX="0"
             android:rotationY="-15"
-            android:text="Borrar todo"
+            android:text="Buscar por pais"
             android:paddingStart="16dp" />
     </LinearLayout>
 
@@ -138,56 +138,33 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/BuscarPorAño"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:rotation="-0"
             android:rotationX="0"
             android:rotationY="15"
-            android:text="Obtener libro Autor"
+            android:text="Buscar por año"
             android:paddingStart="16dp" />
 
         <Button
-            android:id="@+id/btn6"
+            android:id="@+id/btnLol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:rotation="0"
             android:rotationX="0"
             android:rotationY="-15"
-            android:text="Mostrar todos libros"
+            android:text="Secreto🤫"
             android:paddingStart="16dp" />
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btnCambiarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/cambiarView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:rotation="-0"
-            android:rotationX="0"
-            android:rotationY="15"
-            android:text="Ir a Autores"
-            android:paddingStart="16dp" />
-
-        <Button
-            android:id="@+id/buttonPoblar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:rotation="-0"
-            android:rotationX="0"
-            android:rotationY="15"
-            android:text="Poblar BDD"
-            android:paddingStart="16dp" />
-    </LinearLayout>
+        android:text="Vista Libros" />
 
 
 </LinearLayout>

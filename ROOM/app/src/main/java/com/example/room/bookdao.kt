@@ -13,11 +13,11 @@ interface BooksDao {
     @Query("SELECT * FROM books")
     fun getAllBooks(): List<BookEntity>
 
-    @Query("SELECT * FROM books WHERE title =:title")
-    fun getByTitle(title:String): List<BookEntity>
+    @Query("SELECT * FROM books WHERE title = :title")
+    fun getByTitle(title: String): List<BookEntity>
 
-    @Query("SELECT * FROM books WHERE author =:author")
-    fun getByAuthor(author:String): List<BookEntity>
+    @Query("SELECT * FROM books WHERE idAuthor = :authorId")
+    fun getByAuthor(authorId: Long): List<BookEntity>
 
     @Query("DELETE FROM books WHERE id = (SELECT id FROM books LIMIT 1)")
     fun deleteFirstBook()
@@ -27,5 +27,4 @@ interface BooksDao {
 
     @Update
     fun update(book: BookEntity)
-
 }
