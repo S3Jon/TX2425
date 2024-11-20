@@ -147,7 +147,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.btnLol.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/S3Jon/TX2425/tree/Room-Ejemplo")
+                Uri.parse("https://github.com/S3Jon/TX2425/tree/AD-Room")
             )
             ContextCompat.startActivity(this, intent, null)
         }
