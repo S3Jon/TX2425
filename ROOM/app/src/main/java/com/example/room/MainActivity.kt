@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.room.Room
 import com.example.room.Migrations.MIGRATION_1_2
 import com.example.room.Migrations.MIGRATION_2_3
+import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
     private lateinit var database: AppDatabase
@@ -90,6 +91,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Autor no encontrado", Toast.LENGTH_SHORT).show()
                 }
             }
+            else {
+                Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnBorrarPrimer.setOnClickListener {
@@ -98,6 +102,9 @@ class MainActivity : AppCompatActivity() {
 
         btnBorrarTodo.setOnClickListener {
             database.booksDao.emptyBookDb()
+            database.authorsDao.emptyAuthorDb()
+            Toast.makeText(this, "Base de datos borrada", Toast.LENGTH_SHORT).show()
+            tvBooks.text = ""
         }
 
         btnLibroPorAutor.setOnClickListener {
@@ -133,11 +140,24 @@ class MainActivity : AppCompatActivity() {
 
         btnAuthors.setOnClickListener {
            intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
         }
 
         btnPoblar.setOnClickListener {
-            saveAuthors()
-            saveBooks()
+            var mensaje = ""
+            if (database.authorsDao.getAllAuthors().isNotEmpty()) {
+                mensaje = "Authors ya tiene datos."
+            } else {
+                saveAuthors()
+                mensaje = "Authors poblado."
+            }
+            if (database.booksDao.getAllBooks().isNotEmpty()) {
+                mensaje = mensaje.plus(" Books ya tiene datos.")
+            } else {
+                saveBooks()
+                mensaje = mensaje.plus(" Books poblado.")
+            }
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
         }
 
 

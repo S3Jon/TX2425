@@ -22,6 +22,9 @@ interface AuthorDao {
     @Query("SELECT * FROM authors WHERE name = :name")
     fun getAuthorByName(name: String): AuthorEntity?
 
+    @Query("SELECT * FROM authors WHERE name = :name")
+    fun getAuthorsByName(name: String): List<AuthorEntity>
+
     @Query("SELECT * FROM authors WHERE country_of_origin = :country")
     fun getByCountry(country: String): List<AuthorEntity>
 
