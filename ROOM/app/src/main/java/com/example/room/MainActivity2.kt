@@ -9,19 +9,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.room.Room
+import com.example.room.Migrations.MIGRATION_1_2
+import com.example.room.Migrations.MIGRATION_2_3
 import com.example.room.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
     private lateinit var database: AppDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main2)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        database = Room.databaseBuilder(
+            application, AppDatabase::class.java, AppDatabase.DATABASE_NAME
+        ).allowMainThreadQueries().addMigrations(MIGRATION_1_2, MIGRATION_2_3).build()
+
         binding.btnCambiarView.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
         binding.btnMostratAutores.setOnClickListener {
             val autores = database.authorsDao.getAllAuthors()
             binding.tvAuthorData.text = ""
@@ -41,21 +55,25 @@ class MainActivity2 : AppCompatActivity() {
                     val dia = fecha.substringBefore("/")
                     val mes = fecha.substringAfter("/").substringBefore("/")
                     val anio = fecha.substringAfterLast("/")
-                    val autor = AuthorEntity(
-                        name = nombre,
-                        countryOfOrigin = pais,
-                        dateOfBirth = dia + "/" + mes,
-                        yearOfBirth = anio,
-                        mainGenre = "Lol"
-                    )
-                    database.authorsDao.insertAuthor(autor)
-                    Toast.makeText(this, "Autor añadido", Toast.LENGTH_SHORT).show()
-                }
-                else {
+                    if (database.authorsDao.dostThouExist(nombre, anio, pais, dia + "/" + mes)) {
+                        Toast.makeText(this, "El autor ya existe", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                    else {
+                        val autor = AuthorEntity(
+                            name = nombre,
+                            countryOfOrigin = pais,
+                            dateOfBirth = dia + "/" + mes,
+                            yearOfBirth = anio,
+                            mainGenre = "Lol"
+                        )
+                        database.authorsDao.insertAuthor(autor)
+                        Toast.makeText(this, "Autor añadido", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
                     Toast.makeText(this, "Formato de fecha incorrecto (DD/MM/YYYY)", Toast.LENGTH_SHORT).show()
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
@@ -81,11 +99,7 @@ class MainActivity2 : AppCompatActivity() {
                     database.authorsDao.update(autor)
                     Toast.makeText(this, "Autor actualizado", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(
-                        this,
-                        "Formato de fecha incorrecto (DD/MM/YYYY)",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Formato de fecha incorrecto (DD/MM/YYYY)", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show()
@@ -103,8 +117,7 @@ class MainActivity2 : AppCompatActivity() {
                 if (autor.isEmpty()) {
                     binding.tvAuthorData.text = "No se encontraron autores"
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Ingrese un nombre", Toast.LENGTH_SHORT).show()
             }
         }
@@ -116,17 +129,16 @@ class MainActivity2 : AppCompatActivity() {
                 binding.tvAuthorData.text = ""
                 if (autores.isEmpty()) {
                     binding.tvAuthorData.text = "No se encontraron autores"
-                }
-                else {
+                } else {
                     autores.forEach { autor ->
                         binding.tvAuthorData.append("${autor.id}, ${autor.name}, ${autor.countryOfOrigin}, ${autor.dateOfBirth}, ${autor.yearOfBirth}, ${autor.mainGenre}\n")
                     }
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Ingrese un país", Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.BuscarPorAnyo.setOnClickListener {
             val anyo = binding.etBirthYear.text.toString().trim()
             if (anyo.isNotEmpty()) {
@@ -138,8 +150,7 @@ class MainActivity2 : AppCompatActivity() {
                 if (autores.isEmpty()) {
                     binding.tvAuthorData.text = "No se encontraron autores"
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Ingrese un año", Toast.LENGTH_SHORT).show()
             }
         }
@@ -147,7 +158,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.btnLol.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/S3Jon/TX2425/tree/AD-Room")
+                Uri.parse("https://github.com/S3Jon/TX2425/tree/Room-Ejemplo")
             )
             ContextCompat.startActivity(this, intent, null)
         }

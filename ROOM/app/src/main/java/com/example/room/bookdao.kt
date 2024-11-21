@@ -25,6 +25,9 @@ interface BooksDao {
     @Query("DELETE FROM books")
     fun emptyBookDb()
 
+    @Query("SELECT EXISTS(SELECT 1 FROM books WHERE title = :title AND idAuthor = :idauthor)")
+    fun getBookByTitleAndAuthor(title: String, idauthor: Long): Boolean
+
     @Update
     fun update(book: BookEntity)
 }

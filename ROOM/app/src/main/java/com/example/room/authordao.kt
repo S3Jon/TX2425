@@ -22,7 +22,7 @@ interface AuthorDao {
     @Query("SELECT * FROM authors WHERE name = :name")
     fun getAuthorByName(name: String): AuthorEntity?
 
-    @Query("SELECT * FROM authors WHERE name = :name")
+    @Query("SELECT * FROM authors WHERE name LIKE '%' || :name || '%'")
     fun getAuthorsByName(name: String): List<AuthorEntity>
 
     @Query("SELECT * FROM authors WHERE country_of_origin = :country")
@@ -39,6 +39,9 @@ interface AuthorDao {
 
     @Query("DELETE FROM authors")
     fun emptyAuthorDb()
+
+    @Query("SELECT EXISTS(SELECT 1 FROM authors WHERE name = :name AND year_of_birth = :year AND country_of_origin = :country AND date_of_birth = :date)")
+    fun dostThouExist(name: String, year: String, country: String, date: String): Boolean
 
     @Update
     fun update(author: AuthorEntity)

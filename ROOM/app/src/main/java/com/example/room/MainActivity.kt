@@ -60,13 +60,20 @@ class MainActivity : AppCompatActivity() {
             if (titulo.isNotEmpty() && autor.isNotEmpty() && fecha.isNotEmpty()) {
                 val author = database.authorsDao.getAuthorByName(autor)
                 if (author != null) {
-                    val query = BookEntity(
-                        title = titulo,
-                        idAuthor = author.id,
-                        pubDate = fecha,
-                        genre = "lol"
-                    )
-                    database.booksDao.insertBook(query)
+                    val bookExists = database.booksDao.getBookByTitleAndAuthor(titulo, author.id)
+                    if (bookExists) {
+                        Toast.makeText(this, "Libro ya existe", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                    else {
+                        val query = BookEntity(
+                            title = titulo,
+                            idAuthor = author.id,
+                            pubDate = fecha,
+                            genre = "lol"
+                        )
+                        database.booksDao.insertBook(query)
+                    }
                 } else {
                     Toast.makeText(this, "Autor no encontrado", Toast.LENGTH_SHORT).show()
                 }
@@ -181,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         val author2 = AuthorEntity(name = "Charles Dickens", countryOfOrigin = "UK", dateOfBirth = "7/2", yearOfBirth = "1812", mainGenre = "Lol")
         val author3 = AuthorEntity(name = "Franz Kafka", countryOfOrigin = "Czech Republic", dateOfBirth = "3/7", yearOfBirth = "1883", mainGenre = "Lol")
         val author4 = AuthorEntity(name = "Fyodor Dostoevsky", countryOfOrigin = "Russia", dateOfBirth = "11/11", yearOfBirth = "1821", mainGenre = "Lol")
-        val author5 = AuthorEntity(name = "Miguel de Cervantes", countryOfOrigin = "Spain", dateOfBirth = "9/29", yearOfBirth = "1547", mainGenre = "Lol")
+        val author5 = AuthorEntity(name = "Miguel de Cervantes", countryOfOrigin = "Spain", dateOfBirth = "29/09", yearOfBirth = "1547", mainGenre = "Lol")
         database.authorsDao.insertAuthor(author1)
         database.authorsDao.insertAuthor(author2)
         database.authorsDao.insertAuthor(author3)

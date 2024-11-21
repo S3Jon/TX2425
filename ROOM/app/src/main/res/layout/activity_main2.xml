@@ -49,14 +49,14 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingBottom="4dp"
-        android:text="Año de nacimiento:"
+        android:text="Fecha de nacimiento:"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/etBirthYear"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:hint="Ingrese año:"
+        android:hint="Ingrese fecha (DD/MM/YYY):"
         android:inputType="date"
         android:padding="8dp" />
 
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Mostrar Datos" />
+        android:text="Mostrar Autores" />
 
     <TextView
         android:id="@+id/tvAuthorData"
@@ -87,7 +87,7 @@
             android:rotation="-0"
             android:rotationX="0"
             android:rotationY="15"
-            android:text="Añadir libro"
+            android:text="Añadir autor"
             android:paddingStart="16dp" />
 
         <Button
