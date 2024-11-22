@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.room.Room
 import com.example.room.Migrations.MIGRATION_1_2
 import com.example.room.Migrations.MIGRATION_2_3
-import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
     private lateinit var database: AppDatabase
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             application, AppDatabase::class.java, AppDatabase.DATABASE_NAME
         ).allowMainThreadQueries().addMigrations(MIGRATION_1_2, MIGRATION_2_3).build()
 
+        //Lolololol
         val btnBooks: Button = findViewById(R.id.btnBooks)
         val btnAnadir: Button = findViewById(R.id.buttonAnadir)
         val btnActualizar: Button = findViewById(R.id.btnActualizar)
@@ -43,13 +43,13 @@ class MainActivity : AppCompatActivity() {
         val tvBooks: TextView = findViewById(R.id.tvBookData)
         val btnAuthors: Button = findViewById(R.id.cambiarView)
         val btnPoblar: Button = findViewById(R.id.buttonPoblar)
+        //Lolololol
 
         btnBooks.setOnClickListener {
             val books = database.booksDao.getAllBooks()
             tvBooks.text = ""
             books.forEach { book ->
-                val author = database.authorsDao.getAuthorById(book.idAuthor)
-                tvBooks.append("${book.id}, ${book.title}, ${author.name}, ${book.pubDate}, ${book.genre}\n")
+                tvBooks.append("${book.id}:, ${book.title}, ${book.authorName}, ${book.pubDate}, ${book.genre}\n")
             }
         }
 
@@ -140,8 +140,7 @@ class MainActivity : AppCompatActivity() {
             val books = database.booksDao.getAllBooks()
             tvBooks.text = ""
             books.forEach { book ->
-                val author = database.authorsDao.getAuthorById(book.idAuthor)
-                tvBooks.append("${book.id}, ${book.title}, ${author.name}, ${book.pubDate}, ${book.genre}\n")
+                tvBooks.append("${book.id}:, ${book.title}, ${book.authorName}, ${book.pubDate}, ${book.genre}\n")
             }
         }
 

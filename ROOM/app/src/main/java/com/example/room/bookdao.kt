@@ -10,8 +10,12 @@ interface BooksDao {
     @Insert
     fun insertBook(book: BookEntity)
 
-    @Query("SELECT * FROM books")
-    fun getAllBooks(): List<BookEntity>
+    @Query("""
+        SELECT books.*, authors.name AS authorName
+        FROM books
+        INNER JOIN authors ON books.idAuthor = authors.id
+    """)
+    fun getAllBooks(): List<BookWithAuthor>
 
     @Query("SELECT * FROM books WHERE title = :title")
     fun getByTitle(title: String): List<BookEntity>
