@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menú principal -->
+    <menuitem 
+        id="menu_sge_root"
+        name="Gestión de Apps"
+        sequence="10"/>
+
+    <!-- Acción para las aplicaciones -->
+    <record id="action_sge_app" model="ir.actions.act_window">
+        <field name="name">Aplicaciones</field>
+        <field name="res_model">sge.app</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Submenú para aplicaciones -->
+    <menuitem 
+        id="menu_sge_app"
+        name="Aplicaciones"
+        parent="menu_sge_root"
+        action="action_sge_app"
+        sequence="1"/>
+</odoo>

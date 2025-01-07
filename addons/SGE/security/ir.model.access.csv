@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sge_app_user,sge.app.user,model_sge_app,base.group_user,1,1,1,1
+access_sge_app_employee_hours_user,sge.app.employee.hours.user,model_sge_app_employee_hours,base.group_user,1,1,1,1

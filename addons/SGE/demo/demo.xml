@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Clientes de demostración -->
+        <record id="demo_partner_1" model="res.partner">
+            <field name="name">TechSolutions S.L.</field>
+            <field name="email">contact@techsolutions.demo</field>
+            <field name="phone">+34 911 222 333</field>
+            <field name="social_network">twitter</field>
+        </record>
+
+        <record id="demo_partner_2" model="res.partner">
+            <field name="name">Innovación Digital</field>
+            <field name="email">info@innovaciondigital.demo</field>
+            <field name="phone">+34 922 333 444</field>
+            <field name="social_network">instagram</field>
+        </record>
+
+        <record id="demo_partner_3" model="res.partner">
+            <field name="name">Marketing Plus</field>
+            <field name="email">contact@marketingplus.demo</field>
+            <field name="phone">+34 933 444 555</field>
+            <field name="social_network">facebook</field>
+        </record>
+
+        <!-- Usuarios/Empleados de demostración -->
+        <record id="demo_employee_1" model="res.users">
+            <field name="name">Ana García</field>
+            <field name="login">ana.garcia@demo.com</field>
+            <field name="password">demo123</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        </record>
+
+        <record id="demo_employee_2" model="res.users">
+            <field name="name">Carlos Rodríguez</field>
+            <field name="login">carlos.rodriguez@demo.com</field>
+            <field name="password">demo123</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        </record>
+
+        <!-- Aplicaciones de demostración -->
+        <record id="demo_app_1" model="sge.app">
+            <field name="name">GestApp Pro</field>
+            <field name="client_id" ref="demo_partner_1"/>
+            <field name="coordinator_id" ref="demo_employee_1"/>
+            <field name="is_ios_compatible" eval="True"/>
+            <field name="state">completed</field>
+        </record>
+
+        <record id="demo_app_2" model="sge.app">
+            <field name="name">MarketAnalytics</field>
+            <field name="client_id" ref="demo_partner_2"/>
+            <field name="coordinator_id" ref="demo_employee_2"/>
+            <field name="is_ios_compatible" eval="False"/>
+            <field name="state">in_progress</field>
+        </record>
+
+        <record id="demo_app_3" model="sge.app">
+            <field name="name">SocialConnect</field>
+            <field name="client_id" ref="demo_partner_3"/>
+            <field name="coordinator_id" ref="demo_employee_1"/>
+            <field name="is_ios_compatible" eval="True"/>
+            <field name="state">draft</field>
+        </record>
+
+        <!-- Horas trabajadas de demostración -->
+        <record id="demo_hours_1" model="sge.app.employee.hours">
+            <field name="app_id" ref="demo_app_1"/>
+            <field name="employee_id" ref="demo_employee_1"/>
+            <field name="hours">120</field>
+        </record>
+
+        <record id="demo_hours_2" model="sge.app.employee.hours">
+            <field name="app_id" ref="demo_app_1"/>
+            <field name="employee_id" ref="demo_employee_2"/>
+            <field name="hours">80</field>
+        </record>
+
+        <record id="demo_hours_3" model="sge.app.employee.hours">
+            <field name="app_id" ref="demo_app_2"/>
+            <field name="employee_id" ref="demo_employee_2"/>
+            <field name="hours">60</field>
+        </record>
+
+        <record id="demo_hours_4" model="sge.app.employee.hours">
+            <field name="app_id" ref="demo_app_3"/>
+            <field name="employee_id" ref="demo_employee_1"/>
+            <field name="hours">40</field>
+        </record>
+    </data>
+</odoo>
