@@ -7,8 +7,12 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar"/>
-                </header>
+					<field name="state" widget="statusbar" statusbar_visible="draft,in_progress,completed,cancelled"/>
+					<button name="action_set_in_progress" type="object" string="En Desarrollo" class="oe_highlight" modifiers="{'invisible': [('state', '!=', 'draft')]}"/>
+					<button name="action_set_completed" type="object" string="Completada" class="oe_highlight" modifiers="{'invisible': [('state', '!=', 'in_progress')]}"/>
+					<button name="action_set_cancelled" type="object" string="Cancelada" class="oe_highlight" modifiers="{'invisible': [('state', 'not in', ['draft', 'in_progress'])]}"/>
+					<button name="action_reset_to_draft" type="object" string="Reiniciar a Borrador" class="oe_highlight" modifiers="{'invisible': [('state', 'not in', ['in_progress', 'completed', 'cancelled'])]}"/>
+				</header>
                 <sheet>
                     <group>
                         <group>
