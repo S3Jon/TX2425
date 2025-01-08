@@ -9,7 +9,7 @@
         - Control de coordinadores de proyecto
         - Información sobre compatibilidad iOS
     """,
-    'author': "Tu Empresa",
+    'author': "Joe Mamma",
     'website': "https://www.tuempresa.com",
     'category': 'Services/Project',
     'version': '1.0',
