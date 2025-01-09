@@ -6,7 +6,9 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet/group" position="inside">
-                <field name="is_communicator" string="Es Comunicador"/>
+				<group>
+					<field name="is_communicator" string="Es Comunicador"/>
+                </group>
             </xpath>
         </field>
     </record>

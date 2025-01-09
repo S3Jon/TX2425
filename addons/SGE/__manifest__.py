@@ -12,6 +12,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/create_employee.xml',
+        'views/create_company.xml',
         'views/project_views.xml',
         'views/company_views.xml',
         'views/employee_views.xml',
