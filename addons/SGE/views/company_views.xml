@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<?xml version="1.0" encoding="utf-8"?><odoo>
     <record id="view_company_tree" model="ir.ui.view">
         <field name="name">res.company.tree</field>
         <field name="model">res.company</field>

@@ -4,13 +4,14 @@
         <field name="name">sge.project.tree</field>
         <field name="model">sge.project</field>
         <field name="arch" type="xml">
-            <tree decoration-info="state=='draft'" decoration-success="state=='in_progress'" decoration-warning="state=='developing'" decoration-danger="state=='cancelled'">
+            <tree decoration-danger="state=='cancelled'" decoration-muted="state=='draft'" decoration-info="state=='in_progress'" decoration-warning="state=='review'" decoration-success="state=='done'">
                 <field name="name"/>
                 <field name="state"/>
                 <field name="company_id"/>
                 <field name="communicator_id"/>
                 <field name="has_ios_support"/>
-                <!-- <field name="total_hours" sum="Total Horas"/> -->
+                <field name="start_date"/>
+                <field name="end_date"/>
             </tree>
         </field>
     </record>
@@ -22,7 +23,12 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,developing,cancelled"/>
+                    <field name="state" widget="statusbar" statusbar_visible="cancelled,draft,in_progress,review,done"/>
+                    <button name="action_set_cancelled" type="object" string="Cancelada" class="btn-danger" modifiers="{'invisible': [('state', 'in', ['cancelled', 'done'])]}"/>
+                    <button name="action_set_draft" type="object" string="Planificando" class="btn-secondary" modifiers="{'invisible': [('state', 'in', ['cancelled', 'done'])]}"/>
+                    <button name="action_set_in_progress" type="object" string="En Desarrollo" class="btn-primary" modifiers="{'invisible': [('state', 'in', ['cancelled', 'done'])]}"/>
+                    <button name="action_set_review" type="object" string="Revisando" class="btn-warning" modifiers="{'invisible': [('state', 'in', ['cancelled', 'done'])]}"/>
+                    <button name="action_set_done" type="object" string="Terminada" class="btn-success" modifiers="{'invisible': [('state', 'in', ['cancelled', 'done'])]}"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -35,17 +41,19 @@
                             <field name="company_id"/>
                             <field name="communicator_id" domain="[('is_communicator', '=', True)]"/>
                             <field name="has_ios_support"/>
+                            <field name="start_date" readonly="1"/>
+                            <field name="end_date" readonly="1"/>
                         </group>
                         <group string="Métricas">
                             <field name="total_hours" readonly="1"/>
                         </group>
                     </group>
                     <notebook>
-                        <page string="Empleados">
-                            <field name="employees_ids" widget="one2many_list">
+                        <page string="Horas Trabajadas">
+                            <field name="project_hours_ids">
                                 <tree editable="bottom">
-                                    <field name="name"/>
-                                    <field name="hours_spent"/>
+                                    <field name="employee_id"/>
+                                    <field name="hours"/>
                                 </tree>
                             </field>
                         </page>
@@ -69,14 +77,16 @@
                 <field name="name"/>
                 <field name="company_id"/>
                 <field name="communicator_id"/>
+                <field name="start_date"/>
                 <separator/>
                 <filter name="ios_support" string="Con Soporte iOS" domain="[('has_ios_support', '=', True)]"/>
                 <filter name="no_ios_support" string="Sin Soporte iOS" domain="[('has_ios_support', '=', False)]"/>
                 <separator/>
-                <filter name="draft" string="Borrador" domain="[('state', '=', 'draft')]"/>
+                <filter name="cancelled" string="Cancelada" domain="[('state', '=', 'cancelled')]"/>
+                <filter name="draft" string="Planificando" domain="[('state', '=', 'draft')]"/>
                 <filter name="in_progress" string="En Desarrollo" domain="[('state', '=', 'in_progress')]"/>
-                <filter name="developing" string="Desarrollando" domain="[('state', '=', 'developing')]"/>
-                <filter name="cancelled" string="Cancelado" domain="[('state', '=', 'cancelled')]"/>
+                <filter name="review" string="Revisando" domain="[('state', '=', 'review')]"/>
+                <filter name="done" string="Terminada" domain="[('state', '=', 'done')]"/>
                 <group expand="0" string="Agrupar Por">
                     <filter string="Estado" name="state" context="{'group_by': 'state'}"/>
                     <filter string="Soporte iOS" name="has_ios_support" context="{'group_by': 'has_ios_support'}"/>

@@ -18,15 +18,15 @@
 
     <!-- Submenú Empresas -->
     <menuitem id="menu_sge_companies" 
-              name="Empresas" 
-              parent="menu_sge_data_management" 
+              name="Empresas cliente"
+			  parent="menu_sge_root" 
               action="SGE.action_sge_company" 
-              sequence="1" />
+              sequence="4" />
 
     <!-- Submenú Empleados -->
     <menuitem id="menu_sge_employees" 
-              name="Empleados" 
-              parent="menu_sge_data_management" 
+              name="Gestionar empleados"
+			  parent="menu_sge_root"
               action="SGE.action_sge_employee" 
-              sequence="2" />
+              sequence="5" />
 </odoo>
