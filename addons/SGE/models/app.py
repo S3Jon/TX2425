@@ -6,7 +6,7 @@ class Project(models.Model):
     _description = 'Proyecto'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string='Nombre del Proyecto', tracking=True)
+    name = fields.Char(string='Nombre del Proyecto', tracking=True, size=50)
     state = fields.Selection([
         ('cancelled', 'Cancelada'),
         ('draft', 'Planificando'),
@@ -21,6 +21,7 @@ class Project(models.Model):
     total_hours = fields.Float(string='Total de Horas', compute='_compute_total_hours', store=True, tracking=True)
     start_date = fields.Date(string='Fecha de Inicio', default=fields.Date.context_today, readonly=True, tracking=True)
     end_date = fields.Date(string='Fecha de Fin', readonly=True, tracking=True)
+    description = fields.Text(string='Descripción', tracking=True, size=50)
 
     @api.depends('project_hours_ids.hours')
     def _compute_total_hours(self):
