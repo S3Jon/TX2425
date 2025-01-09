@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Menú principal -->
-    <menuitem 
-        id="menu_sge_root"
-        name="Gestión de Apps"
-        sequence="10"/>
+    <menuitem id="menu_sge_root" name="Gestión de Proyectos" sequence="1" />
 
-    <!-- Acción para las aplicaciones -->
-    <record id="action_sge_app" model="ir.actions.act_window">
-        <field name="name">Aplicaciones</field>
-        <field name="res_model">sge.app</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+    <!-- Submenú Proyectos -->
+    <menuitem id="menu_sge_projects" 
+              name="Proyectos" 
+              parent="menu_sge_root" 
+              sequence="2" 
+              action="SGE.action_sge_project" />
 
-    <!-- Submenú para aplicaciones -->
-    <menuitem 
-        id="menu_sge_app"
-        name="Aplicaciones"
-        parent="menu_sge_root"
-        action="action_sge_app"
-        sequence="1"/>
+    <!-- Submenú Gestión de Datos -->
+    <menuitem id="menu_sge_data_management" 
+              name="Gestión de Datos" 
+              parent="menu_sge_root" 
+              sequence="3" />
+
+    <!-- Submenú Empresas -->
+    <menuitem id="menu_sge_companies" 
+              name="Empresas" 
+              parent="menu_sge_data_management" 
+              action="SGE.action_sge_company" 
+              sequence="1" />
+
+    <!-- Submenú Empleados -->
+    <menuitem id="menu_sge_employees" 
+              name="Empleados" 
+              parent="menu_sge_data_management" 
+              action="SGE.action_sge_employee" 
+              sequence="2" />
 </odoo>
