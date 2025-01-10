@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <tree decoration-danger="state=='cancelled'" decoration-muted="state=='draft'" decoration-info="state=='in_progress'" decoration-warning="state=='review'" decoration-success="state=='done'">
                 <field name="name"/>
-				<field name="description"/>
+                <field name="description"/>
                 <field name="state"/>
                 <field name="company_id"/>
                 <field name="communicator_id"/>
@@ -36,17 +36,17 @@
                         <h1>
                             <field name="name" placeholder="Nombre del Proyecto"/>
                         </h1>
-						<h3>
-							<field name="description" placeholder="Descripción del Proyecto"/>
-						</h3>
+                        <h3>
+                            <field name="description" placeholder="Descripción del Proyecto"/>
+                        </h3>
                     </div>
                     <group>
                         <group string="Información Principal">
                             <field name="company_id"/>
                             <field name="communicator_id" domain="[('is_communicator', '=', True)]"/>
                             <field name="has_ios_support"/>
-                            <field name="start_date" readonly="1"/>
-                            <field name="end_date" readonly="1"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
                         </group>
                         <group string="Métricas">
                             <field name="total_hours" readonly="1"/>

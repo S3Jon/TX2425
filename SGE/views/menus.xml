@@ -1,0 +1,65 @@
+<odoo>
+    <!-- Menú principal -->
+    <menuitem id="menu_sge_root" name="Gestión de Proyectos" sequence="1" />
+
+    <!-- Submenú Proyectos -->
+    <menuitem id="menu_sge_projects" 
+              name="Proyectos" 
+              parent="menu_sge_root" 
+              sequence="2" 
+              action="action_sge_project" />
+
+    <!-- Submenú Gestión de Datos -->
+    <menuitem id="menu_sge_data_management" 
+              name="Gestión de Datos" 
+              parent="menu_sge_root" 
+              sequence="3" />
+
+    <!-- Submenú Empresas -->
+    <menuitem id="menu_sge_companies" 
+              name="Empresas cliente"
+              parent="menu_sge_root" 
+              action="action_sge_company" 
+              sequence="4" />
+
+    <!-- Submenú Empleados -->
+    <menuitem id="menu_sge_employees" 
+              name="Gestionar empleados"
+              parent="menu_sge_root"
+              action="action_sge_employee" 
+              sequence="5" />
+
+    <!-- Acción para marcar compatibilidad plena iOS -->
+    <record id="action_mark_all_ios_support" model="ir.actions.server">
+        <field name="name">Marcar compatibilidad plena iOS</field>
+        <field name="model_id" ref="model_sge_project"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['sge.project'].action_mark_all_ios_support()
+        </field>
+    </record>
+
+    <!-- Acción para marcar incompatibilidad plena iOS -->
+    <record id="action_unmark_all_ios_support" model="ir.actions.server">
+        <field name="name">Marcar incompatibilidad plena iOS</field>
+        <field name="model_id" ref="model_sge_project"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['sge.project'].action_unmark_all_ios_support()
+        </field>
+    </record>
+
+    <!-- Menú para marcar compatibilidad plena iOS -->
+    <menuitem id="menu_sge_soporteIOStrue"
+              name="Marcar compatibilidad plena iOS"
+              parent="menu_sge_root"
+              action="action_mark_all_ios_support"
+              sequence="6"/>
+
+    <!-- Menú para marcar incompatibilidad plena iOS -->
+    <menuitem id="menu_sge_soporteIOSfalse"
+              name="Marcar incompatibilidad plena iOS"
+              parent="menu_sge_root"
+              action="action_unmark_all_ios_support"
+              sequence="7"/>
+</odoo>

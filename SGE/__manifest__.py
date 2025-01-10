@@ -1,11 +1,11 @@
 {
     'name': "Gestión de proyectos",
-    'summary': "Sistema de gestión de proyectos",
+    'summary': "Sistema de gestión de proyectos del grupo 2 de DAM",
     'description': """
-        Módulo para SGE kekw
+        Módulo para TFG de SGE
     """,
-    'author': "Son Janchez",
-    'website': "https://github.com/S3Jon",
+    'author': "Grupo 2 DAM",
+    'website': "https://fptxurdinaga.eus/",
     'category': 'Services/Project',
     'version': '1.0',
     'depends': ['base', 'mail', 'hr'],
